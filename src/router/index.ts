@@ -14,7 +14,6 @@ import { useSportStore } from '@/stores/sport'
 import CountryForm from '@/views/event/CountryForm.vue'
 import SportForm from '@/views/event/SportForm.vue'
 import LoginRegister from '@/views/LoginRegister.vue'
-import LoginView from '@/views/LoginView.vue'
 import UserListView from '@/views/UserListView.vue'
 import ManageCounrty from '@/views/ManageCounrty.vue'
 

@@ -3,6 +3,9 @@ import { RouterLink, RouterView } from 'vue-router'
 import { mdiAccountPlus, mdiLogin } from '@mdi/js';
 import { SpeedInsights } from '@vercel/speed-insights/vue';
 
+import { useAuthStore } from './stores/auth';
+
+const authStore = useAuthStore();
 </script>
 
 <template>
@@ -20,9 +23,11 @@ import { SpeedInsights } from '@vercel/speed-insights/vue';
             <RouterLink class="font-bold text-[#252A34]" exact-active-class="text-[#FF2E63]" :to="{ name: 'manageCountry' }">MANAGE COUNTRY</RouterLink>
           </div>
           <div class="flex justify-start items-center space-x-10">
-            <RouterLink class="font-bold text-[#252A34]" exact-active-class="text-[#FF2E63]" :to="{ name: 'login-register'}">Log In</RouterLink>
+            <RouterLink v-if="!authStore.token && !authStore.isLoggingOut" class="font-bold text-[#252A34]" exact-active-class="text-[#FF2E63]" :to="{ name: 'login-register'}">Log In</RouterLink>
+            <button v-else-if="authStore.token && !authStore.isLoggingOut" class="font-bold text-[#252A34]" @click="authStore.logout">Logout</button>
+            <!-- ขณะ logout ให้ปุ่มหายไป -->
+            <span v-else class="text-white">...</span>
           </div>
-
         </nav>
       </div>
     </header>
@@ -39,6 +44,3 @@ import { SpeedInsights } from '@vercel/speed-insights/vue';
     
   </div>
 </template>
-
-<style>
-</style>
